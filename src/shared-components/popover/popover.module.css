@@ -1,0 +1,21 @@
+.popover-container {
+	position: relative;
+	display: inline-block;
+}
+
+.popover-content {
+	position: absolute;
+	z-index: 1;
+	width: fit-content;
+	background-color: black;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding: 5px;
+	border-radius: 4px;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-60%);
+}
+
+.trigger {
+	cursor: pointer;
+}

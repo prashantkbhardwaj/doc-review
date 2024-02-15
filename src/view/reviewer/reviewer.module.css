@@ -1,0 +1,169 @@
+.main-header {
+	background-color: #181f27;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.content-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.sidebar {
+	background-color: #181f27;
+	color: white;
+	height: 95vh;
+	width: 28vw;
+	border: 3px solid #535f67;
+	border-radius: 4px;
+}
+
+.head-wrapper {
+	padding: 10px 10px 0px 10px;
+	font-size: 18px;
+}
+
+.field-card-wrapper {
+	display: flex;
+	justify-content: space-between;
+	background-color: #273139;
+	color: white;
+	border-radius: 4px;
+	margin: 5px 10px;
+	padding: 7px;
+	transition: background-color 0.3s ease;
+}
+
+.field-card-wrapper:hover {
+	background-color: grey;
+}
+
+.field-card-left-items {
+	display: flex;
+}
+
+.field-card-left-item-content {
+	padding: 8px;
+}
+
+.field-card-right-items {
+	display: flex;
+	margin: 10px;
+}
+
+.more-dot {
+	border-radius: 50%;
+	padding: 2px;
+	margin: 2px;
+	background-color: white;
+}
+
+.more-btn {
+	cursor: pointer;
+}
+
+.cards-wrapper {
+	height: 75vh;
+	overflow-y: auto;
+}
+
+.sidebar-footer-wrapper {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	border-top: 3px solid #535f67;
+}
+
+.preview-border {
+	background-color: #182027;
+	border: 3px solid #535f67;
+	width: 70vw;
+	height: 95vh;
+	border-radius: 4px;
+}
+
+.preview-wrapper {
+	width: 69vw;
+	height: 92vh;
+	margin-top: 15px;
+	background-color: #526069;
+	border-radius: 4px;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.white-page-wrapper {
+	position: relative;
+	margin: 20px;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.zoom-controls-wrapper {
+	background-color: #182027;
+	border: 2px solid #616d76;
+	position: fixed;
+	width: 50px;
+	color: white;
+	text-align: center;
+	bottom: 4vh;
+	left: 63vw;
+	border-radius: 40px;
+	padding: 5px;
+}
+
+.zoom-btn {
+	font-size: 40px;
+	font-weight: bold;
+	margin: 10px;
+	cursor: pointer;
+}
+
+.zoom-btn:active {
+	transform: translateY(2px);
+}
+
+.zoomable-div {
+	transform-origin: center top;
+	transition: transform 0.2s;
+	height: -webkit-fill-available;
+}
+
+.zoom-percentage-box {
+	background-color: #182027;
+	border: 2px solid #616d76;
+	position: fixed;
+	width: 50px;
+	color: white;
+	bottom: 23vh;
+	left: 63vw;
+	border-radius: 50%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	padding: 5px;
+	font-size: 18px;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 40px;
+}
+
+.modal-content {
+	padding: 20px;
+	text-align: center;
+}
+
+.modal-body {
+	font-size: 20px;
+	font-weight: bold;
+}

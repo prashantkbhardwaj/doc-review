@@ -1,0 +1,41 @@
+.button-wrapper {
+	background-color: #273139;
+	color: white;
+	border-radius: 5px;
+	width: fit-content;
+	height: fit-content;
+	cursor: pointer;
+	font-weight: bold;
+	border: 0;
+}
+
+.button-wrapper:hover {
+	background-color: #535f67;
+}
+
+.button-wrapper:active {
+	transform: translateY(2px);
+}
+
+.button-wrapper:disabled,
+.button[disabled] {
+	background-color: #cccccc;
+	color: #666666;
+	cursor: auto;
+	transform: none;
+}
+
+.default {
+	padding: 15px;
+	font-size: 16px;
+}
+
+.small {
+	padding: 5px;
+	font-size: 14px;
+}
+
+.large {
+	padding: 25px;
+	font-size: 20px;
+}
