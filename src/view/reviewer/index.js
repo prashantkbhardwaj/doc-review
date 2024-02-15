@@ -4,16 +4,14 @@ import Tabs from '../../shared-components/tabs';
 import FieldCard from './components/field-card';
 import SidebarFooter from './components/sidebar-footer';
 import SECTION_DATA from '../../constants/sidebar-data';
-import ImageViewer from './components/highlighter';
+import ImageViewer from './components/image-viewer';
 import PAGES_DATA from '../../constants/pages-data';
 import Modal from '../../shared-components/modal';
 import Button from '../../shared-components/button';
 import Checkbox from '../../shared-components/checkbox';
 
-const DocReviewer = (props) => {
-	const {} = props;
+const DocReviewer = () => {
 	const [zoomPercentage, setZoomPercentage] = useState(35);
-	const [offset, setOffset] = useState({ x: 0, y: 0 });
 	const [fieldData, setFieldData] = useState(
 		SECTION_DATA?.data?.sections[0]?.children.map((item) => {
 			return { checked: false, ...item };
@@ -36,24 +34,22 @@ const DocReviewer = (props) => {
 		} else if (selectedFields.length <= 1 && !isConfirmDisabled) {
 			setIsConfirmDisabled(true);
 		}
-	}, [selectedFields]);
+	}, [selectedFields, isConfirmDisabled]);
 
 	const positionsArray = SECTION_DATA?.data?.sections[0]?.children.map(
 		(item) => {
 			return {
 				x: item.content?.position[0],
 				y: item.content?.position[1],
-				height: item.content?.position[2],
-				width: item.content?.position[3],
+				height: item.content?.position[3] - item.content?.position[1],
+				width: item.content?.position[2] - item.content?.position[0],
 				id: item.id,
 			};
 		},
 	);
 
 	const zoomIn = () =>
-		setZoomPercentage((zoomPercentage) =>
-			zoomPercentage !== 100 ? zoomPercentage + 10 : zoomPercentage,
-		);
+		setZoomPercentage((zoomPercentage) => zoomPercentage + 10);
 
 	const zoomOut = () =>
 		setZoomPercentage((zoomPercentage) =>
@@ -69,11 +65,13 @@ const DocReviewer = (props) => {
 	const updateCheckedField = (val, item) => {
 		const fields = fieldData;
 		const index = fields.findIndex((obj) => item.id === obj.id);
-		fields[index].checked = val;
-		setFieldData([...fields]);
+		if (index >= 0) {
+			fields[index].checked = val;
+			setFieldData([...fields]);
+		}
 	};
 
-	const captureField = (action, item, source) => {
+	const captureField = (action, item) => {
 		const filteredArr = positionsArray.filter((obj) => obj.id === item.id);
 		const selections = selectedFields;
 		if (action && !selections.includes(filteredArr[0])) {
@@ -109,13 +107,24 @@ const DocReviewer = (props) => {
 		}
 	};
 
+	const switchTheme = (val) => {
+		if (val) {
+			document.querySelector('body').setAttribute('data-theme', 'dark');
+		} else {
+			document.querySelector('body').setAttribute('data-theme', 'light');
+		}
+	};
+
 	return (
 		<>
 			<div className={styles['main-body']}>
 				<header>
 					<div className={styles['main-header']}>
 						<div>Review Screen</div>
-						<Checkbox label='Dark Mode'></Checkbox>
+						<Checkbox
+							onClick={(e) => switchTheme(e.target.checked)}
+							label='Light Mode'
+						></Checkbox>
 					</div>
 				</header>
 				<div className={styles['content-wrapper']}>
@@ -124,7 +133,9 @@ const DocReviewer = (props) => {
 							<div
 								className={styles['zoomable-div']}
 								style={{
-									transform: `scale(${zoomPercentage / 100})`,
+									transform: `scale(${
+										zoomPercentage / 100
+									}) `,
 									width: PAGES_DATA.data.documents[0]
 										?.pages[0]?.image.width,
 								}}
@@ -137,6 +148,8 @@ const DocReviewer = (props) => {
 											width={`${item.image.width}px`}
 											height={`${item.image.height}px`}
 											boxes={selectedFields}
+											highlightField={captureField}
+											positionsArray={positionsArray}
 										/>
 									),
 								)}
@@ -176,6 +189,9 @@ const DocReviewer = (props) => {
 											data={item}
 											removeField={removeField}
 											captureField={captureField}
+											isSelected={selectedFields.some(
+												(obj) => obj['id'] === item.id,
+											)}
 										/>
 									))}
 								</div>
@@ -217,7 +233,7 @@ const DocReviewer = (props) => {
 						Fields confirmed and processed successfully!
 					</div>
 					<div className={styles['modal-footer']}>
-						<Button block={true} onClick={toggleConfirmedBox}>
+						<Button block='true' onClick={toggleConfirmedBox}>
 							Ok, got it!
 						</Button>
 					</div>

@@ -1,5 +1,5 @@
 import './App.css';
-import DocReviewer from './view/reviewer';
+import DocReviewer from '../view/reviewer';
 
 function App() {
 	return <DocReviewer />;

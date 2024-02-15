@@ -8,13 +8,20 @@ import Button from '../../../shared-components/button';
 import { TAG_TYPES } from '../../../constants/components-const';
 
 const FieldCard = (props) => {
-	const { data, removeField, captureField, isAllSelected } = props;
+	const { data, removeField, captureField, isSelected } = props;
 
 	return (
 		<div
-			// onMouseEnter={() => captureField(true, data, 'hover')}
-			// onMouseLeave={() => captureField(false, data, 'hover')}
-			className={styles['field-card-wrapper']}
+			// onMouseEnter={() => captureField(true, data)}
+			// onMouseLeave={() => captureField(false, data)}
+			className={
+				isSelected
+					? [
+							styles['field-card-wrapper'],
+							styles['selected-field-card'],
+					  ].join(' ')
+					: styles['field-card-wrapper']
+			}
 		>
 			<div className={styles['field-card-left-items']}>
 				<Tags type={getRandomItem(TAG_TYPES)}>

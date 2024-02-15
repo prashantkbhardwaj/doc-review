@@ -1,6 +1,6 @@
 .button-wrapper {
-	background-color: #273139;
-	color: white;
+	background-color: var(--third-backdround);
+	color: var(--text-color);
 	border-radius: 5px;
 	width: fit-content;
 	height: fit-content;

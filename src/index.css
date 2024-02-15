@@ -1,19 +1,15 @@
 :root {
-	--background-color-light: #fff;
-	--text-color-light: #000;
-
-	--background-color-dark: #121212;
-	--text-color-dark: #ffffff;
+	--primary-background: #181f27;
+	--secondary-background: #182027;
+	--third-backdround: #273139;
+	--text-color: white;
 }
 
-.light-theme {
-	--background-color: var(--background-color-light);
-	--text-color: var(--text-color-light);
-}
-
-.dark-theme {
-	--background-color: var(--background-color-dark);
-	--text-color: var(--text-color-dark);
+[data-theme='dark'] {
+	--primary-background: #fafcfb;
+	--secondary-background: #c3c7c4;
+	--third-backdround: #dee0df;
+	--text-color: black;
 }
 
 body {
@@ -23,7 +19,8 @@ body {
 		'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: #273139;
+	background-color: var(--primary-background);
+	color: var(--text-color);
 }
 
 code {
