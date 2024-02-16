@@ -13,6 +13,16 @@ const PAGES_DATA = {
 							width: 1700,
 						},
 					},
+
+					// uncomment this for another page
+					// {
+					// 	id: 2,
+					// 	image: {
+					// 		height: 2200,
+					// 		url: './pdf-img.jpg',
+					// 		width: 1700,
+					// 	},
+					// },
 				],
 				status: 'reviewing',
 				title: 'invoice.pdf',

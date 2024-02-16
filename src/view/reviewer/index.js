@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from './reviewer.module.css';
-import Tabs from '../../shared-components/tabs';
-import FieldCard from './components/field-card';
-import SidebarFooter from './components/sidebar-footer';
 import SECTION_DATA from '../../constants/sidebar-data';
-import ImageViewer from './components/image-viewer';
-import PAGES_DATA from '../../constants/pages-data';
 import Modal from '../../shared-components/modal';
-import Button from '../../shared-components/button';
-import Checkbox from '../../shared-components/checkbox';
+import Header from './components/header';
+import Previewer from './components/previewer';
+import Sidebar from './components/sidebar';
+import ConfirmationBox from '../../shared-components/modal/confirmation-box';
+import MessageBox from '../../shared-components/modal/message-box';
 
 const DocReviewer = () => {
 	const [zoomPercentage, setZoomPercentage] = useState(35);
@@ -107,137 +105,49 @@ const DocReviewer = () => {
 		}
 	};
 
-	const switchTheme = (val) => {
-		if (val) {
-			document.querySelector('body').setAttribute('data-theme', 'dark');
-		} else {
-			document.querySelector('body').setAttribute('data-theme', 'light');
-		}
-	};
-
 	return (
 		<>
 			<div className={styles['main-body']}>
-				<header>
-					<div className={styles['main-header']}>
-						<div>Review Screen</div>
-						<Checkbox
-							onClick={(e) => switchTheme(e.target.checked)}
-							label='Light Mode'
-						></Checkbox>
-					</div>
-				</header>
+				<Header />
 				<div className={styles['content-wrapper']}>
-					<div className={styles['preview-border']}>
-						<div className={styles['preview-wrapper']}>
-							<div
-								className={styles['zoomable-div']}
-								style={{
-									transform: `scale(${
-										zoomPercentage / 100
-									}) `,
-									width: PAGES_DATA.data.documents[0]
-										?.pages[0]?.image.width,
-								}}
-							>
-								{PAGES_DATA.data.documents[0]?.pages?.map(
-									(item) => (
-										<ImageViewer
-											key={item.id}
-											imageSrc={'./pdf-img.jpg'}
-											width={`${item.image.width}px`}
-											height={`${item.image.height}px`}
-											boxes={selectedFields}
-											highlightField={captureField}
-											positionsArray={positionsArray}
-										/>
-									),
-								)}
-							</div>
-							<div className={styles['zoom-percentage-box']}>
-								{zoomPercentage}&nbsp;%
-							</div>
-							<div className={styles['zoom-controls-wrapper']}>
-								<div
-									onClick={zoomIn}
-									className={styles['zoom-btn']}
-								>
-									+
-								</div>
-								<div
-									onClick={zoomOut}
-									className={styles['zoom-btn']}
-								>
-									-
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div className={styles['sidebar']}>
-						<div className={styles['head-wrapper']}>Fields</div>
-						<Tabs>
-							<div
-								label='Regular Fields'
-								id='regular'
-								activeTab='regular'
-							>
-								<div className={styles['cards-wrapper']}>
-									{fieldData.map((item) => (
-										<FieldCard
-											key={item.id}
-											data={item}
-											removeField={removeField}
-											captureField={captureField}
-											isSelected={selectedFields.some(
-												(obj) => obj['id'] === item.id,
-											)}
-										/>
-									))}
-								</div>
-							</div>
-							<div label='Column Fields' id='column'>
-								This is tab 2 content.
-							</div>
-						</Tabs>
-						<SidebarFooter
-							selectAll={selectAll}
-							isAllSelected={isAllSelected}
-							isConfirmDisabled={isConfirmDisabled}
-							openConfimation={toggleConfirmationBox}
-						/>
-					</div>
+					<Previewer
+						zoomPercentage={zoomPercentage}
+						zoomIn={zoomIn}
+						zoomOut={zoomOut}
+						selectedFields={selectedFields}
+						captureField={captureField}
+						positionsArray={positionsArray}
+					/>
+					<Sidebar
+						fieldData={fieldData}
+						removeField={removeField}
+						captureField={captureField}
+						selectedFields={selectedFields}
+						selectAll={selectAll}
+						isAllSelected={isAllSelected}
+						isConfirmDisabled={isConfirmDisabled}
+						toggleConfirmationBox={toggleConfirmationBox}
+					/>
 				</div>
 			</div>
 			<Modal isOpen={confirmationBox} onClose={toggleConfirmationBox}>
-				<div className={styles['modal-content']}>
-					<div className={styles['modal-body']}>
-						Are you sure you want to confirm the selected fields?
-					</div>
-					<div className={styles['modal-footer']}>
-						<Button
-							onClick={() => {
-								toggleConfirmationBox();
-								toggleConfirmedBox();
-							}}
-						>
-							Yes, Confirm
-						</Button>
-						<Button onClick={toggleConfirmationBox}>Cancel</Button>
-					</div>
-				</div>
+				<ConfirmationBox
+					message='Are you sure you want to confirm the selected fields?'
+					primaryBtnLabel='Yes, Confirm'
+					primaryBtnAction={() => {
+						toggleConfirmationBox();
+						toggleConfirmedBox();
+					}}
+					secondaryBtnLabel='Cancel'
+					secondaryBtnAction={toggleConfirmationBox}
+				/>
 			</Modal>
 			<Modal isOpen={confirmedBox} onClose={toggleConfirmedBox}>
-				<div className={styles['modal-content']}>
-					<div className={styles['modal-body']}>
-						Fields confirmed and processed successfully!
-					</div>
-					<div className={styles['modal-footer']}>
-						<Button block='true' onClick={toggleConfirmedBox}>
-							Ok, got it!
-						</Button>
-					</div>
-				</div>
+				<MessageBox
+					message='Fields confirmed and processed successfully!'
+					btnLabel='Ok, got it!'
+					btnAction={toggleConfirmedBox}
+				/>
 			</Modal>
 		</>
 	);

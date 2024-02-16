@@ -1,5 +1,6 @@
 import React from 'react';
 import { getRandomItem } from '../../../utility/code-utils';
+import styles from '../reviewer.module.css';
 
 const HIGHLIGHT_COLORS = ['red', 'blue', 'green', 'yellow', 'orange', 'pink'];
 
@@ -7,7 +8,7 @@ const ImageViewer = (props) => {
 	const { imageSrc, boxes, width, height, highlightField, positionsArray } =
 		props;
 	return (
-		<>
+		<div className={styles['img-container']}>
 			<img
 				src={imageSrc}
 				alt='Highlightable'
@@ -22,7 +23,6 @@ const ImageViewer = (props) => {
 						highlightField(false, box);
 					}}
 					key={index}
-					className='bounding-box'
 					style={{
 						position: 'absolute',
 						left: `${box.x}px`,
@@ -36,7 +36,7 @@ const ImageViewer = (props) => {
 					}}
 				/>
 			))}
-		</>
+		</div>
 	);
 };
 

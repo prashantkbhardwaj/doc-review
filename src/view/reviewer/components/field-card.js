@@ -3,9 +3,8 @@ import styles from '../reviewer.module.css';
 import Tags from '../../../shared-components/tags';
 import Checkbox from '../../../shared-components/checkbox';
 import { getRandomItem, initialsCreator } from '../../../utility/code-utils';
-import Popover from '../../../shared-components/popover';
-import Button from '../../../shared-components/button';
 import { TAG_TYPES } from '../../../constants/components-const';
+import MoreBtn from './more-btn';
 
 const FieldCard = (props) => {
 	const { data, removeField, captureField, isSelected } = props;
@@ -43,19 +42,7 @@ const FieldCard = (props) => {
 						captureField(e.target.checked, data, 'checkbox')
 					}
 				/>
-				<Popover
-					triggerContent={
-						<div className={styles['more-btn']}>
-							<div className={styles['more-dot']}></div>
-							<div className={styles['more-dot']}></div>
-							<div className={styles['more-dot']}></div>
-						</div>
-					}
-				>
-					<Button onClick={() => removeField(data.id)} size='small'>
-						Remove
-					</Button>
-				</Popover>
+				<MoreBtn removeField={removeField} id={data.id} />
 			</div>
 		</div>
 	);
