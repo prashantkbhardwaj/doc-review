@@ -26,6 +26,7 @@ There are utility files which have some util functions.
 There is a constants folder which have constants for data dump and components.
 There is a view folder to hold all the components required for the main view.
 index.css has the configs of all global CSS variables for theames.
+`To add more pages, please go to src/constants/pages-data.js and uncomment the 2nd object.`
 
 ### Shared Components
 
