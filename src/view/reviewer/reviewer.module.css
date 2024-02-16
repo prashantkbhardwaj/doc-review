@@ -14,7 +14,7 @@
 .sidebar {
 	background-color: var(--primary-background);
 	color: var(--text-color);
-	height: 95vh;
+	height: 93vh;
 	width: 28vw;
 	border: 3px solid #535f67;
 	border-radius: 4px;
@@ -69,7 +69,7 @@
 }
 
 .cards-wrapper {
-	height: 75vh;
+	height: 70vh;
 	overflow-y: auto;
 }
 
@@ -84,13 +84,13 @@
 	background-color: var(--secondary-background);
 	border: 3px solid #535f67;
 	width: 70vw;
-	height: 95vh;
+	height: 93vh;
 	border-radius: 4px;
 }
 
 .preview-wrapper {
 	width: 69vw;
-	height: 92vh;
+	height: 89vh;
 	margin-top: 15px;
 	background-color: #526069;
 	border-radius: 4px;
